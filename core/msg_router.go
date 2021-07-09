@@ -93,12 +93,7 @@ var SupportedMsgTypes = map[MsgType]*Types{
 	MTVerifyAddress: {
 		Type: reflect.TypeOf([]byte{}),
 		signBytes: func(in interface{}) ([]byte, error) {
-			data := in.([]byte)
-			// check sign data
-			if !bytes.Equal(data, FixedSignBytes) {
-				return nil, xerrors.Errorf("need %s, have: %s", FixedSignBytes, data)
-			}
-			return data, nil
+			return RandSignBytes, nil
 		},
 		parseObj: func(in []byte, meta MsgMeta) (interface{}, error) {
 			return in, nil
